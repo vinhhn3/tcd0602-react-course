@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { Component } from "react";
 
 export class Search extends Component {
@@ -12,12 +11,7 @@ export class Search extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.text);
-    axios
-      .get(`https://api.github.com/search/users?q=${this.state.text}`)
-      .then((response) => {
-        console.log(response.data.items);
-      });
+    this.props.searchUsers(this.state.text);
   };
 
   render() {

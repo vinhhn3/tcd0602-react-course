@@ -8,19 +8,24 @@ import Navbar from "./layout/Navbar";
 class App extends React.Component {
   state = {
     usersData: [],
+    searchText: "",
   };
 
-  componentDidMount() {
-    axios.get("https://api.github.com/users").then((response) => {
-      this.setState({ usersData: response.data });
-    });
-  }
+  searchUsers = (text) => {
+    this.setState({ searchText: text });
+    axios
+      .get(`https://api.github.com/search/users?q=${text}`)
+      .then((response) => {
+        this.setState({ usersData: response.data.items });
+      });
+  };
+
   render() {
     return (
       <div className="App">
         <Navbar />
         <div className="container">
-          <Search />
+          <Search searchUsers={this.searchUsers} />
           <Users usersData={this.state.usersData} />
         </div>
       </div>
