@@ -1,9 +1,13 @@
 import axios from "axios";
 import React from "react";
+import { Route, Switch } from "react-router-dom/cjs/react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom/cjs/react-router-dom.min";
 import "./App.css";
 import Search from "./components/users/Search";
 import Users from "./components/users/Users";
 import Navbar from "./layout/Navbar";
+import About from "./pages/About";
+import NotFound from "./pages/NotFound";
 
 class App extends React.Component {
   state = {
@@ -22,13 +26,27 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <Navbar />
-        <div className="container">
-          <Search searchUsers={this.searchUsers} />
-          <Users usersData={this.state.usersData} />
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className="container">
+            <Switch>
+              <Route exact path="/">
+                <>
+                  <Search searchUsers={this.searchUsers} />
+                  <Users usersData={this.state.usersData} />
+                </>
+              </Route>
+              <Route exact path="/about">
+                <About />
+              </Route>
+              <Route path="*">
+                <NotFound />
+              </Route>
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
