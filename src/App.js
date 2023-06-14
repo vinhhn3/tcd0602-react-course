@@ -1,5 +1,7 @@
 import React from "react";
 import "./App.css";
+import Users from "./components/users/Users";
+import Navbar from "./layout/Navbar";
 
 class App extends React.Component {
   // Properties => state
@@ -21,11 +23,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>Hello World</h1>
-        <h2>Full Name: {this.state.fullName}</h2>
-        <h3>Address: {this.state.address}</h3>
-        <h3>Age: {this.state.age}</h3>
-        <button onClick={this.increaseAge}>Increase age</button>
+        <Navbar />
+        <Users />
       </div>
     );
   }
