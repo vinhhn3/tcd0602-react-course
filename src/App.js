@@ -8,6 +8,7 @@ import Users from "./components/users/Users";
 import Navbar from "./layout/Navbar";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import User from "./pages/User";
 
 class App extends React.Component {
   state = {
@@ -39,6 +40,9 @@ class App extends React.Component {
               </Route>
               <Route exact path="/about">
                 <About />
+              </Route>
+              <Route exact path="/user/:loginId">
+                <User />
               </Route>
               <Route path="*">
                 <NotFound />
