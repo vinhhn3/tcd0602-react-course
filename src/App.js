@@ -1,30 +1,26 @@
+import axios from "axios";
 import React from "react";
 import "./App.css";
 import Users from "./components/users/Users";
 import Navbar from "./layout/Navbar";
 
 class App extends React.Component {
-  // Properties => state
   state = {
-    fullName: "Vinh Hoang",
-    age: 30,
-    gender: "male",
-    email: "nnheo@example.com",
-    phone: "0987654321",
-    address: "Vietnam",
+    usersData: [],
   };
 
-  // Methods
-  increaseAge = () => {
-    this.setState({
-      age: this.state.age + 1,
+  componentDidMount() {
+    axios.get("https://api.github.com/users").then((response) => {
+      this.setState({ usersData: response.data });
     });
-  };
+  }
   render() {
     return (
       <div className="App">
         <Navbar />
-        <Users />
+        <div className="container">
+          <Users usersData={this.state.usersData} />
+        </div>
       </div>
     );
   }
