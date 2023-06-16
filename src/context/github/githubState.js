@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useReducer } from "react";
+import { getUserByLogin, getUsers } from "../../api/GithubApi";
 import GithubContext from "./githubContext";
 import GithubReducer from "./githubReducer";
 const GithubState = (props) => {
@@ -11,9 +11,7 @@ const GithubState = (props) => {
   const [state, dispatch] = useReducer(GithubReducer, initialState);
 
   const searchUsers = async (text) => {
-    const result = await axios.get(
-      `https://api.github.com/search/users?q=${text}`
-    );
+    const result = await getUsers(text);
     dispatch({
       type: "SEARCH_USERS",
       payload: result.data.items,
@@ -21,7 +19,7 @@ const GithubState = (props) => {
   };
 
   const getUser = async (loginId) => {
-    const response = await axios.get(`https://api.github.com/users/${loginId}`);
+    const response = await getUserByLogin(loginId);
     dispatch({
       type: "GET_USER",
       payload: response.data,
