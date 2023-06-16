@@ -1,38 +1,36 @@
-import React, { Component } from "react";
+import React, { useContext, useState } from "react";
+import GithubContext from "../../context/github/githubContext";
 
-export class Search extends Component {
-  state = {
-    text: "",
+const Search = () => {
+  const githubContext = useContext(GithubContext);
+  const [text, setText] = useState("");
+  const { searchUsers } = githubContext;
+  const handleChange = (event) => {
+    setText(event.target.value);
   };
 
-  handleChange = (event) => {
-    this.setState({ text: event.target.value });
-  };
-
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    this.props.searchUsers(this.state.text);
+    searchUsers(text);
   };
 
-  render() {
-    return (
-      <div>
-        <form className="form">
-          <input
-            type="text"
-            placeholder="Search GitHub User"
-            onChange={this.handleChange}
-          />
-          <input
-            type="submit"
-            className="btn btn-dark btn-block"
-            value="Search"
-            onClick={this.handleSubmit}
-          />
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form className="form">
+        <input
+          type="text"
+          placeholder="Search GitHub User"
+          onChange={handleChange}
+        />
+        <input
+          type="submit"
+          className="btn btn-dark btn-block"
+          value="Search"
+          onClick={handleSubmit}
+        />
+      </form>
+    </div>
+  );
+};
 
 export default Search;

@@ -12,15 +12,7 @@ import NotFound from "./pages/NotFound";
 import User from "./pages/User";
 
 const App = () => {
-  const [usersData, setUsersData] = useState([]);
   const [user, setUser] = useState({});
-
-  const searchUsers = async (text) => {
-    const result = await axios.get(
-      `https://api.github.com/search/users?q=${text}`
-    );
-    setUsersData(result.data.items);
-  };
 
   const getUser = async (loginId) => {
     const response = await axios.get(`https://api.github.com/users/${loginId}`);
@@ -36,8 +28,8 @@ const App = () => {
             <Switch>
               <Route exact path="/">
                 <>
-                  <Search searchUsers={searchUsers} />
-                  <Users usersData={usersData} />
+                  <Search />
+                  <Users />
                 </>
               </Route>
               <Route exact path="/about">
