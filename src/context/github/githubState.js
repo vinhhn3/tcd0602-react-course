@@ -20,12 +20,21 @@ const GithubState = (props) => {
     });
   };
 
+  const getUser = async (loginId) => {
+    const response = await axios.get(`https://api.github.com/users/${loginId}`);
+    dispatch({
+      type: "GET_USER",
+      payload: response.data,
+    });
+  };
+
   return (
     <GithubContext.Provider
       value={{
         usersData: state.usersData,
         user: state.user,
         searchUsers,
+        getUser,
       }}
     >
       {props.children}
