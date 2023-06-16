@@ -11,10 +11,10 @@ const GithubState = (props) => {
   const [state, dispatch] = useReducer(GithubReducer, initialState);
 
   const searchUsers = async (text) => {
-    const result = await GithubApi.getUsers(text);
+    const response = await GithubApi.getUsers(text);
     dispatch({
       type: "SEARCH_USERS",
-      payload: result.data.items,
+      payload: response.data.items,
     });
   };
 

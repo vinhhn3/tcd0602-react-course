@@ -4,8 +4,8 @@ const axiosClient = axios.create({
   baseURL: "https://api.github.com",
 });
 
-const getUsers = (text) => {
-  return axiosClient.get(`/search/users?q=${text}`);
+const getUsers = (query) => {
+  return axiosClient.get(`/search/users?q=${query}`);
 };
 
 const getUser = (login) => {
