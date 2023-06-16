@@ -8,8 +8,13 @@ const getUsers = (text) => {
   return axiosClient.get(`/search/users?q=${text}`);
 };
 
-const getUserByLogin = (login) => {
+const getUser = (login) => {
   return axiosClient.get(`/users/${login}`);
 };
 
-export { getUserByLogin, getUsers };
+const GithubApi = {
+  getUsers,
+  getUser,
+};
+
+export default GithubApi;
