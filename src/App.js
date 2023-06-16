@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom/cjs/react-router-dom.m
 import "./App.css";
 import Search from "./components/users/Search";
 import Users from "./components/users/Users";
+import GithubState from "./context/github/githubState";
 import Navbar from "./layout/Navbar";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
@@ -27,30 +28,32 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <div className="container">
-          <Switch>
-            <Route exact path="/">
-              <>
-                <Search searchUsers={searchUsers} />
-                <Users usersData={usersData} />
-              </>
-            </Route>
-            <Route exact path="/about">
-              <About />
-            </Route>
-            <Route exact path="/user/:loginId">
-              <User user={user} getUser={getUser} />
-            </Route>
-            <Route path="*">
-              <NotFound />
-            </Route>
-          </Switch>
+    <GithubState>
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className="container">
+            <Switch>
+              <Route exact path="/">
+                <>
+                  <Search searchUsers={searchUsers} />
+                  <Users usersData={usersData} />
+                </>
+              </Route>
+              <Route exact path="/about">
+                <About />
+              </Route>
+              <Route exact path="/user/:loginId">
+                <User user={user} getUser={getUser} />
+              </Route>
+              <Route path="*">
+                <NotFound />
+              </Route>
+            </Switch>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </GithubState>
   );
 };
 
